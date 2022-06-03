@@ -1,16 +1,71 @@
 import { Button, StyleSheet } from 'react-native';
-
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
+import AppleHealthKit, {
+  HealthValue,
+  HealthKitPermissions,
+  HealthInputOptions,
+} from 'react-native-health';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
+/* Permission options */
+const permissions = {
+  permissions: {
+    read: [AppleHealthKit.Constants.Permissions.Steps],
+    write: [],
+  },
+} as HealthKitPermissions;
+
+AppleHealthKit.initHealthKit(permissions, (error: string) => {
+  /* Called after we receive a response from the system */
+
+  if (error) {
+    console.log('[ERROR] Cannot grant permissions!');
+  }
+
+  /* Can now read or write to HealthKit */
+});
+
+function getCalorieFromWalkDistance(walkDistance: number): number {
+  // 10000보 == 300kcal로 계산
+  const calorie: number = 0.03 * walkDistance;
+  return calorie;
+}
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
+  const [walkDistance, setWalkDistance] = useState<number>(0);
+  const [walkCalorie, setWalkCalorie] = useState<number>(0);
+  useEffect(() => {
+    let optionsStepCount = {
+      // startDate: new Date(2022, 4, 1).toISOString(),
+      // endDate: new Date(2022, 6, 4).toISOString(),
+      // date: new Date(2022, 5, 2).toISOString(),
+      includeManuallyAdded: true,
+    };
+
+    AppleHealthKit.getStepCount(
+      optionsStepCount,
+      (err: Object, results: HealthValue) => {
+        if (err) {
+          return;
+        }
+        console.log(results);
+        const stepCount = results.value;
+        setWalkDistance(stepCount);
+        setWalkCalorie(getCalorieFromWalkDistance(stepCount));
+      }
+    );
+  }, [walkDistance]);
+
   return (
     <View style={styles.container}>
       <View style={styles.walk}>
-        <Text>도보(자동): api이용해서 걸음 수 가져오기 -> 소모칼로리 보여주기</Text>
+        <Text style={styles.walkDistance}>
+          {walkDistance} 걸음, {walkCalorie}kcal 소모
+        </Text>
       </View>
       <View
         style={styles.separator}
@@ -45,7 +100,11 @@ const styles = StyleSheet.create({
   },
   walk: {
     flex: 1,
-    backgroundColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  walkDistance: {
+    fontSize: 20,
   },
   calorie: { flex: 1, backgroundColor: 'blue' },
   weight: { flex: 1, backgroundColor: 'green' },
