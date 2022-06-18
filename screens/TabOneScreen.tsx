@@ -55,6 +55,8 @@ export default function TabOneScreen({
 }: RootTabScreenProps<'TabOne'>) {
   const [walkDistance, setWalkDistance] = useState<number>(0);
   const [walkCalorie, setWalkCalorie] = useState<number>(0);
+  const [calorieIntake, setCalorieIntake] = useState<number>(0);
+
   useEffect(() => {
     let optionsStepCount = {
       // startDate: new Date(2022, 4, 1).toISOString(),
@@ -77,6 +79,11 @@ export default function TabOneScreen({
     );
   }, [walkDistance]);
 
+  // 섭취 칼로리 변경
+  const onClickCalorieIntake = (calorieChange: number) => {
+    setCalorieIntake((calorie) => calorie + calorieChange);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.walk}>
@@ -90,7 +97,15 @@ export default function TabOneScreen({
         darkColor="rgba(255,255,255,0.1)"
       />
       <View style={styles.calorie}>
-        <Text>섭취 칼로리: 수동입력</Text>
+        <Text>섭취 칼로리: {calorieIntake}</Text>
+        <Button
+          title="-100kcal"
+          onPress={() => onClickCalorieIntake(-100)}
+        ></Button>
+        <Button
+          title="+100kcal"
+          onPress={() => onClickCalorieIntake(100)}
+        ></Button>
       </View>
       <View
         style={styles.separator}
