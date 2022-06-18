@@ -175,17 +175,17 @@ export default function TabOneScreen({
       <View style={styles.weight}>
         <Text style={styles.weightChangeText}>예상 체중변화</Text>
         <View style={styles.weightChangeValueContainer}>
-          {weightChange.toFixed(2) > 0 ? (
+          {weightChange > 0 ? (
             <Text
               style={[styles.weightChangeValue, styles.weightChangeValuePlus]}
             >
-              +{weightChange.toFixed(2)}kg
+              +{weightChange.toFixed(3)}kg
             </Text>
           ) : (
             <Text
               style={[styles.weightChangeValue, styles.weightChangeValueMinus]}
             >
-              {weightChange.toFixed(2)}kg
+              {weightChange.toFixed(3)}kg
             </Text>
           )}
         </View>
