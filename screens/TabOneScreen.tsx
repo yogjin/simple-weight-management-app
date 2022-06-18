@@ -27,12 +27,19 @@ AppleHealthKit.initHealthKit(permissions, (error: string) => {
 
   /* Can now read or write to HealthKit */
 });
-
 function getCalorieFromWalkDistance(walkDistance: number): number {
   // 10000보 == 300kcal로 계산
   const calorie: number = 0.03 * walkDistance;
   return calorie;
 }
+
+// 기초대사량 구하기
+function getBMR(gender: string, age: number, cm: number, kg: number): number {
+  return gender === 'male'
+    ? 66.47 + 13.75 * kg + 5 * cm - 6.76 * age
+    : 655.1 + 9.56 * kg + 1.85 * cm - 4.68 * age;
+}
+
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
