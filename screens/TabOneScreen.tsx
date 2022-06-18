@@ -41,13 +41,13 @@ function getBMR(gender: string, age: number, cm: number, kg: number): number {
 }
 
 // 예상 체중 변화 구하기
-// 섭취칼로리 - (기초대사량 + 도보)
+// 변화량: (섭취칼로리 - (기초대사량 + 도보) / 7000)kg
 function getWeightChange(
   calorieIntake: number,
   BMR: number,
   calorieWalk: number
-) {
-  return calorieIntake - (BMR + calorieWalk);
+): number {
+  return (calorieIntake - (BMR + calorieWalk)) / 7000;
 }
 
 export default function TabOneScreen({
