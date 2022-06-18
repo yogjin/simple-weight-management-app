@@ -50,12 +50,17 @@ function getWeightChange(
   return (calorieIntake - (BMR + calorieWalk)) / 7000;
 }
 
+const BMR: number = getBMR('male', 25, 173, 69);
+
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
   const [walkDistance, setWalkDistance] = useState<number>(0);
   const [walkCalorie, setWalkCalorie] = useState<number>(0);
   const [calorieIntake, setCalorieIntake] = useState<number>(0);
+  const [weightChange, setWeightChange] = useState<number>(
+    getWeightChange(calorieIntake, BMR, walkCalorie)
+  );
 
   useEffect(() => {
     let optionsStepCount = {
@@ -79,9 +84,14 @@ export default function TabOneScreen({
     );
   }, [walkDistance]);
 
-  // 섭취 칼로리 변경
+  // 섭취 칼로리 변경 & 예상 체중 변화 변경
   const onClickCalorieIntake = (calorieChange: number) => {
-    setCalorieIntake((calorie) => calorie + calorieChange);
+    setCalorieIntake((calorie) => {
+      setWeightChange(
+        getWeightChange(calorie + calorieChange, BMR, walkCalorie)
+      );
+      return calorie + calorieChange;
+    });
   };
 
   return (
@@ -113,7 +123,7 @@ export default function TabOneScreen({
         darkColor="rgba(255,255,255,0.1)"
       />
       <View style={styles.weight}>
-        <Text>예상 체중변화: 섭취칼로리 - 기초대사량 + 도보</Text>
+        <Text>예상 체중변화: {weightChange}kg</Text>
       </View>
     </View>
   );
