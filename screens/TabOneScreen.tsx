@@ -110,18 +110,34 @@ export default function TabOneScreen({
         <Text style={styles.calorieIntake}>섭취 칼로리</Text>
         <Text style={styles.calorieIntake}>{calorieIntake}kcal</Text>
         <View style={styles.calorieBtnContainer}>
-          <TouchableOpacity
-            style={[styles.calorieIntakeBtn, styles.calorieIntakeMinusBtn]}
-            onPress={() => onClickCalorieIntake(-100)}
-          >
-            <Text style={styles.calorieIntakeText}>-100</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.calorieIntakeBtn, styles.calorieIntakePlusBtn]}
-            onPress={() => onClickCalorieIntake(100)}
-          >
-            <Text style={styles.calorieIntakeText}>+100</Text>
-          </TouchableOpacity>
+          <View style={styles.caloriePlusBtnContainer}>
+            <TouchableOpacity
+              style={[styles.calorieIntakeBtn, styles.calorieIntakeMinusBtn]}
+              onPress={() => onClickCalorieIntake(-100)}
+            >
+              <Text style={styles.calorieIntakeText}>-100</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.calorieIntakeBtn, styles.calorieIntakeMinusBtn]}
+              onPress={() => onClickCalorieIntake(-10)}
+            >
+              <Text style={styles.calorieIntakeText}>-10</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.caloriePlusBtnContainer}>
+            <TouchableOpacity
+              style={[styles.calorieIntakeBtn, styles.calorieIntakePlusBtn]}
+              onPress={() => onClickCalorieIntake(100)}
+            >
+              <Text style={styles.calorieIntakeText}>+100</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.calorieIntakeBtn, styles.calorieIntakePlusBtn]}
+              onPress={() => onClickCalorieIntake(10)}
+            >
+              <Text style={styles.calorieIntakeText}>+10</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
       <View
@@ -178,10 +194,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 5,
   },
+  caloriePlusBtnContainer: {},
+  calorieMinusBtnContainer: {},
   calorieIntakeBtn: {
     padding: 15,
     borderRadius: 5,
     margin: 5,
+    alignItems: 'center',
   },
   calorieIntakeMinusBtn: { backgroundColor: 'rgb(229, 80, 57)' },
   calorieIntakePlusBtn: { backgroundColor: 'rgb(120, 224, 143)' },
