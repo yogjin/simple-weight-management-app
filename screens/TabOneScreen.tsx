@@ -132,9 +132,19 @@ export default function TabOneScreen({
       <View style={styles.weight}>
         <Text style={styles.weightChangeText}>예상 체중변화</Text>
         <View style={styles.weightChangeValueContainer}>
-          <Text style={styles.weightChangeValue}>
-            {weightChange.toFixed(2)}kg
-          </Text>
+          {weightChange.toFixed(2) > 0 ? (
+            <Text
+              style={[styles.weightChangeValue, styles.weightChangeValuePlus]}
+            >
+              +{weightChange.toFixed(2)}kg
+            </Text>
+          ) : (
+            <Text
+              style={[styles.weightChangeValue, styles.weightChangeValueMinus]}
+            >
+              {weightChange.toFixed(2)}kg
+            </Text>
+          )}
         </View>
       </View>
     </View>
@@ -188,4 +198,6 @@ const styles = StyleSheet.create({
   weightChangeValue: {
     fontSize: 35,
   },
+  weightChangeValuePlus: { color: '#44bd32' },
+  weightChangeValueMinus: { color: '#c23616' },
 });
