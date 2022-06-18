@@ -9,6 +9,12 @@ import AppleHealthKit, {
 } from 'react-native-health';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { getItemFromAsync, setItemToAsync } from '../modules/asyncStroage';
+
+// setItemToAsync(new Date().toDateString(), 450).then(console.log);
+// 오늘날짜 string
+// 형식: Tue Sep 20 2022
+const todayDate: string = new Date().toDateString();
 
 /* Permission options */
 const permissions = {
@@ -58,15 +64,14 @@ export default function TabOneScreen({
   const [walkDistance, setWalkDistance] = useState<number>(0);
   const [walkCalorie, setWalkCalorie] = useState<number>(0);
   const [calorieIntake, setCalorieIntake] = useState<number>(0);
-  const [weightChange, setWeightChange] = useState<number>(
-    getWeightChange(calorieIntake, BMR, walkCalorie)
-  );
+  const [weightChange, setWeightChange] = useState<number>(0);
 
+  // set State
+  // state: walkDistance, walkCalorie
   useEffect(() => {
     let optionsStepCount = {
-      // startDate: new Date(2022, 4, 1).toISOString(),
+      date: new Date(2022, 5, 18).toISOString(),
       // endDate: new Date(2022, 6, 4).toISOString(),
-      // date: new Date(2022, 5, 2).toISOString(),
       includeManuallyAdded: true,
     };
 
@@ -84,14 +89,36 @@ export default function TabOneScreen({
     );
   }, [walkDistance]);
 
+  // Set state
+  // state: calorieIntake(asyncStorage)
+  useEffect(() => {
+    getItemFromAsync(todayDate)
+      .then((calorie) =>
+        calorie ? setCalorieIntake(parseInt(calorie)) : setCalorieIntake(0)
+      )
+      .catch(console.error);
+  }, []);
+
+  // Set state
+  // state: weightChange
+  useEffect(() => {
+    setWeightChange(getWeightChange(calorieIntake, BMR, walkCalorie));
+  });
+
   // 섭취 칼로리 변경 & 예상 체중 변화 변경
   const onClickCalorieIntake = (calorieChange: number) => {
-    setCalorieIntake((calorie) => {
-      setWeightChange(
-        getWeightChange(calorie + calorieChange, BMR, walkCalorie)
-      );
-      return calorie + calorieChange;
-    });
+    setItemToAsync(todayDate, calorieIntake + calorieChange).then(console.log);
+    getItemFromAsync(todayDate)
+      .then((value) => {
+        if (value) {
+          const calorie = parseInt(value);
+          setCalorieIntake(calorie);
+          setWeightChange(getWeightChange(calorie, BMR, walkCalorie));
+        } else {
+          setCalorieIntake(0);
+        }
+      })
+      .catch(console.error);
   };
 
   return (
