@@ -1,4 +1,4 @@
-import { Button, StyleSheet } from 'react-native';
+import { Button, StyleSheet, TouchableOpacity } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
@@ -107,15 +107,22 @@ export default function TabOneScreen({
         darkColor="rgba(255,255,255,0.1)"
       />
       <View style={styles.calorie}>
-        <Text>섭취 칼로리: {calorieIntake}</Text>
-        <Button
-          title="-100kcal"
-          onPress={() => onClickCalorieIntake(-100)}
-        ></Button>
-        <Button
-          title="+100kcal"
-          onPress={() => onClickCalorieIntake(100)}
-        ></Button>
+        <Text style={styles.calorieIntake}>섭취 칼로리</Text>
+        <Text style={styles.calorieIntake}>{calorieIntake}kcal</Text>
+        <View style={styles.calorieBtnContainer}>
+          <TouchableOpacity
+            style={[styles.calorieIntakeBtn, styles.calorieIntakeMinusBtn]}
+            onPress={() => onClickCalorieIntake(-100)}
+          >
+            <Text style={styles.calorieIntakeText}>-100</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.calorieIntakeBtn, styles.calorieIntakePlusBtn]}
+            onPress={() => onClickCalorieIntake(100)}
+          >
+            <Text style={styles.calorieIntakeText}>+100</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View
         style={styles.separator}
@@ -123,7 +130,10 @@ export default function TabOneScreen({
         darkColor="rgba(255,255,255,0.1)"
       />
       <View style={styles.weight}>
-        <Text>예상 체중변화: {weightChange}kg</Text>
+        <Text style={styles.weightChangeText}>예상 체중변화</Text>
+        <View style={styles.weightChangeValueContainer}>
+          <Text style={styles.weightChangeValue}>{weightChange}kg</Text>
+        </View>
       </View>
     </View>
   );
@@ -148,6 +158,32 @@ const styles = StyleSheet.create({
   walkDistance: {
     fontSize: 20,
   },
-  calorie: { flex: 1, backgroundColor: 'blue' },
-  weight: { flex: 1, backgroundColor: 'green' },
+  calorie: { flex: 1, alignItems: 'center' },
+  calorieIntake: {
+    fontSize: 20,
+  },
+  calorieBtnContainer: {
+    flexDirection: 'row',
+    marginTop: 5,
+  },
+  calorieIntakeBtn: {
+    padding: 15,
+    borderRadius: 5,
+    margin: 5,
+  },
+  calorieIntakeMinusBtn: { backgroundColor: 'rgb(229, 80, 57)' },
+  calorieIntakePlusBtn: { backgroundColor: 'rgb(120, 224, 143)' },
+  calorieIntakeText: {
+    fontSize: 20,
+  },
+
+  weight: { flex: 1, alignItems: 'center' },
+  weightChangeText: { fontSize: 20 },
+  weightChangeValueContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  weightChangeValue: {
+    fontSize: 35,
+  },
 });
