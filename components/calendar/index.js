@@ -21,6 +21,7 @@ import {
 import GestureRecognizer, {
   swipeDirections,
 } from 'react-native-swipe-gestures';
+import { TabBarIcon } from '../../navigation';
 
 export class Calendar extends React.Component {
   state = {
@@ -186,10 +187,18 @@ export class Calendar extends React.Component {
           this.getPreMonth();
         }}
       >
-        <View>
-          <Text style={style.calendarTitle}>
-            {this.state.curYear}년 {this.state.curMonth + 1}월
-          </Text>
+        <View style={style.calendarHeader}>
+          <View style={style.calendarIcon}>
+            <TabBarIcon name="chevron-left" />
+          </View>
+          <View style={style.calendarTitle}>
+            <Text style={style.calendarTitleText}>
+              {this.state.curYear}년 {this.state.curMonth + 1}월
+            </Text>
+          </View>
+          <View style={style.calendarIcon}>
+            <TabBarIcon name="chevron-right" />
+          </View>
         </View>
         <View style={style.calendar}>
           <View
@@ -269,12 +278,21 @@ export class Calendar extends React.Component {
                                         <Text
                                           style={[
                                             style.dayLineText,
+                                            elsub.weightChange > 0
+                                              ? style.dayLineWeightPlus
+                                              : style.dayLineWeightMinus,
                                             { color: elsub.color },
                                           ]}
                                           numberOfLines={1}
                                           ellipsizeMode="tail"
                                         >
-                                          {elsub.weightChange.toFixed(3)}
+                                          {elsub.weightChange > 0
+                                            ? `+${elsub.weightChange.toFixed(
+                                                3
+                                              )}`
+                                            : `${elsub.weightChange.toFixed(
+                                                3
+                                              )}`}
                                         </Text>
                                       </View>
                                     );

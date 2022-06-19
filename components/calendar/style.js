@@ -11,9 +11,23 @@ export default StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
-  calendarTitle: {
-    fontSize: 20,
+  calendarHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 10,
+  },
+  calendarIcon: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  calendarTitle: {
+    flex: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  calendarTitleText: {
+    fontSize: 20,
   },
   calendar: {
     flex: 1,
@@ -63,6 +77,12 @@ export default StyleSheet.create({
     marginBottom: 4,
   },
   dayLineText: {
-    fontSize: 10,
+    fontSize: 13,
+  },
+  dayLineWeightPlus: {
+    backgroundColor: '#c23616',
+  },
+  dayLineWeightMinus: {
+    backgroundColor: '#44bd32',
   },
 });
