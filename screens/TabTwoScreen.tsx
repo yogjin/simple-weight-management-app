@@ -92,9 +92,25 @@ export default function TabTwoScreen() {
       <View style={styles.weightChangeContainer}>
         <Text style={styles.weightChangeText}>예상 체중변화</Text>
         <View style={styles.weightChangeValueContainer}>
-          <Text style={styles.weightChangeValueText}>
-            {getSumOfWeightChange(schedule).toFixed(3)}kg
-          </Text>
+          {getSumOfWeightChange(schedule) > 0 ? (
+            <Text
+              style={[
+                styles.weightChangeValueText,
+                styles.weightChangeValueTextPlus,
+              ]}
+            >
+              {getSumOfWeightChange(schedule).toFixed(3)}kg
+            </Text>
+          ) : (
+            <Text
+              style={[
+                styles.weightChangeValueText,
+                styles.weightChangeValueTextMinus,
+              ]}
+            >
+              {getSumOfWeightChange(schedule).toFixed(3)}kg
+            </Text>
+          )}
         </View>
       </View>
     </View>
@@ -131,4 +147,8 @@ const styles = StyleSheet.create({
     fontSize: 35,
     marginBottom: 20,
   },
+  weightChangeValueTextPlus: {
+    color: '#44bd32',
+  },
+  weightChangeValueTextMinus: { color: '#c23616' },
 });
