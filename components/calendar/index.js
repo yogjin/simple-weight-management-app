@@ -186,6 +186,11 @@ export class Calendar extends React.Component {
           this.getPreMonth();
         }}
       >
+        <View>
+          <Text style={style.calendarTitle}>
+            {this.state.curYear}년 {this.state.curMonth + 1}월
+          </Text>
+        </View>
         <View style={style.calendar}>
           <View
             style={{ width: '100%', height: hp('3%'), flexDirection: 'row' }}

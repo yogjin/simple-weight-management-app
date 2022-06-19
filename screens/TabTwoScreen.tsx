@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   calendar: {
-    flex: 3,
+    flex: 4,
     marginTop: 10,
   },
   separator: {
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
   weightChangeContainer: {
     flex: 1,
     marginTop: 10,
+    alignItems: 'center',
   },
   weightChangeText: {
     fontSize: 20,

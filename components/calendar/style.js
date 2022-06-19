@@ -9,6 +9,11 @@ export default StyleSheet.create({
   calendarView: {
     flex: 1,
     width: '100%',
+    alignItems: 'center',
+  },
+  calendarTitle: {
+    fontSize: 20,
+    marginBottom: 10,
   },
   calendar: {
     flex: 1,
