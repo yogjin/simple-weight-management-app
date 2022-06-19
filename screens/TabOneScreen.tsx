@@ -232,26 +232,29 @@ const styles = StyleSheet.create({
   walkDistance: {
     fontSize: 20,
   },
-  calorie: { flex: 1, alignItems: 'center' },
+  calorie: { flex: 2.5, alignItems: 'center' },
   calorieIntake: {
     fontSize: 20,
   },
   calorieBtnContainer: {
     flexDirection: 'row',
-    marginTop: 5,
+    marginTop: 20,
   },
   caloriePlusBtnContainer: {},
   calorieMinusBtnContainer: {},
   calorieIntakeBtn: {
+    width: 90,
+    height: 90,
     padding: 15,
     borderRadius: 5,
     margin: 5,
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  calorieIntakeMinusBtn: { backgroundColor: 'rgb(229, 80, 57)' },
-  calorieIntakePlusBtn: { backgroundColor: 'rgb(120, 224, 143)' },
+  calorieIntakeMinusBtn: { backgroundColor: 'rgb(120, 224, 143)' },
+  calorieIntakePlusBtn: { backgroundColor: 'rgb(229, 80, 57)' },
   calorieIntakeText: {
-    fontSize: 20,
+    fontSize: 25,
   },
 
   weight: { flex: 1, alignItems: 'center' },
@@ -263,6 +266,6 @@ const styles = StyleSheet.create({
   weightChangeValue: {
     fontSize: 35,
   },
-  weightChangeValuePlus: { color: '#44bd32' },
-  weightChangeValueMinus: { color: '#c23616' },
+  weightChangeValuePlus: { color: '#c23616' },
+  weightChangeValueMinus: { color: '#44bd32' },
 });
