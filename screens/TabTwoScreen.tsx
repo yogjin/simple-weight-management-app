@@ -99,7 +99,7 @@ export default function TabTwoScreen() {
                 styles.weightChangeValueTextPlus,
               ]}
             >
-              {getSumOfWeightChange(schedule).toFixed(3)}kg
+              +{getSumOfWeightChange(schedule).toFixed(3)}kg
             </Text>
           ) : (
             <Text
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   weightChangeValueTextPlus: {
-    color: '#44bd32',
+    color: '#c23616',
   },
-  weightChangeValueTextMinus: { color: '#c23616' },
+  weightChangeValueTextMinus: { color: '#44bd32' },
 });
