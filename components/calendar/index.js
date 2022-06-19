@@ -278,21 +278,31 @@ export class Calendar extends React.Component {
                                         <Text
                                           style={[
                                             style.dayLineText,
-                                            elsub.weightChange > 0
-                                              ? style.dayLineWeightPlus
-                                              : style.dayLineWeightMinus,
+                                            elsub.day.getFullYear() ===
+                                              sub.date.getFullYear() &&
+                                            elsub.day.getMonth() ===
+                                              sub.date.getMonth()
+                                              ? elsub.weightChange > 0
+                                                ? style.dayLineWeightPlus
+                                                : style.dayLineWeightMinus
+                                              : '',
                                             { color: elsub.color },
                                           ]}
                                           numberOfLines={1}
                                           ellipsizeMode="tail"
                                         >
-                                          {elsub.weightChange > 0
-                                            ? `+${elsub.weightChange.toFixed(
-                                                3
-                                              )}`
-                                            : `${elsub.weightChange.toFixed(
-                                                3
-                                              )}`}
+                                          {elsub.day.getFullYear() ===
+                                            sub.date.getFullYear() &&
+                                          elsub.day.getMonth() ===
+                                            sub.date.getMonth()
+                                            ? elsub.weightChange > 0
+                                              ? `+${elsub.weightChange.toFixed(
+                                                  3
+                                                )}`
+                                              : `${elsub.weightChange.toFixed(
+                                                  3
+                                                )}`
+                                            : ''}
                                         </Text>
                                       </View>
                                     );

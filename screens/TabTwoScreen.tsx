@@ -52,6 +52,7 @@ const getSchedule = async () => {
       list: [
         {
           weightChange,
+          day: new Date(today),
         },
       ],
     };
