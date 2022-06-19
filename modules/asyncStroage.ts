@@ -14,9 +14,7 @@ const isEmpty = function (value: any) {
 };
 
 // AsyncStorage get 함수 모듈
-export const getItemFromAsync = (
-  storageName: string
-): Promise<string | null> => {
+export const getItemFromAsync = (storageName: string): Promise<string> => {
   if (isEmpty(storageName)) {
     throw Error('Storage Name is empty');
   }

@@ -36,132 +36,18 @@ export class Calendar extends React.Component {
     nextCount: 0,
     calendarDay: null,
     fadeAni: null,
-    // schedule: [
-    //   {
-    //     no: 1,
-    //     date: 2,
-    //     list: [
-    //       {
-    //         no: 1,
-    //         color: '#000000',
-    //         backgroundColor: '#2b78a2',
-    //         title: '오늘의 일정',
-    //         type: '일정',
-    //       },
-    //       {
-    //         no: 2,
-    //         color: '#000000',
-    //         backgroundColor: '#6ea8c9',
-    //         title: '오늘의 일정',
-    //         type: '일정',
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     no: 2,
-    //     date: 4,
-    //     list: [
-    //       {
-    //         no: 1,
-    //         color: '#000000',
-    //         backgroundColor: '#2b78a2',
-    //         title: '오늘의 일정이 있습니다',
-    //         type: '일정',
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     no: 3,
-    //     date: 6,
-    //     list: [
-    //       {
-    //         no: 1,
-    //         color: '#000000',
-    //         backgroundColor: '#2b78a2',
-    //         title: '오늘의 일정',
-    //         type: '일정',
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     no: 4,
-    //     date: 12,
-    //     list: [
-    //       {
-    //         no: 1,
-    //         color: '#000000',
-    //         backgroundColor: '#b6d227',
-    //         title: '오늘의 일정',
-    //         type: '일정',
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     no: 5,
-    //     date: 24,
-    //     list: [
-    //       {
-    //         no: 1,
-    //         color: '#000000',
-    //         backgroundColor: '#b6d227',
-    //         title: '오늘의 일정',
-    //         type: '일정',
-    //       },
-    //       {
-    //         no: 2,
-    //         color: '#000000',
-    //         backgroundColor: '#b6d227',
-    //         title: '오늘의 일정',
-    //         type: '일정',
-    //       },
-    //       {
-    //         no: 3,
-    //         color: '#000000',
-    //         backgroundColor: '#2b78a2',
-    //         title: '오늘의 일정',
-    //         type: '일정',
-    //       },
-    //       {
-    //         no: 4,
-    //         color: '#000000',
-    //         backgroundColor: '#2b78a2',
-    //         title: '오늘의 일정',
-    //         type: '일정',
-    //       },
-    //       {
-    //         no: 5,
-    //         color: '#000000',
-    //         backgroundColor: '#2b78a2',
-    //         title: '오늘의 일정',
-    //         type: '일정',
-    //       },
-    //       {
-    //         no: 6,
-    //         color: '#000000',
-    //         backgroundColor: '#2b78a2',
-    //         title: '오늘의 일정',
-    //         type: '일정',
-    //       },
-    //       {
-    //         no: 7,
-    //         color: '#000000',
-    //         backgroundColor: '#2b78a2',
-    //         title: '오늘의 일정',
-    //         type: '일정',
-    //       },
-    //     ],
-    //   },
-    // ],
+    schedule: [],
     curListLength: 0,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const date = new Date();
     const today = getDate(date);
     const curMonth = getMonth(date);
     const curYear = getYear(date);
     const monthDays = this.getMonthDays(date, curMonth);
     const fadeAni = new Animated.Value(1);
+    const schedule = this.props.schedule;
 
     this.setState({
       date,
@@ -172,6 +58,7 @@ export class Calendar extends React.Component {
       monthDays,
       monthStart: date,
       fadeAni,
+      schedule,
     });
     // this.props.$data.setCurDate(this.props.$data.prop, curYear, curMonth);
   }
@@ -380,7 +267,7 @@ export class Calendar extends React.Component {
                                           numberOfLines={1}
                                           ellipsizeMode="tail"
                                         >
-                                          {elsub.title}
+                                          {elsub.weightChange.toFixed(3)}
                                         </Text>
                                       </View>
                                     );
