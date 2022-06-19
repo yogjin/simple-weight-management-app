@@ -33,6 +33,28 @@ AppleHealthKit.initHealthKit(permissions, (error: string) => {
 
   /* Can now read or write to HealthKit */
 });
+
+function getOptionsStepCount(date: string): HealthInputOptions {
+  let optionsStepCount = {
+    date,
+    includeManuallyAdded: true,
+  };
+  return optionsStepCount;
+}
+
+export const getWalkFromDate = async (date: string): Promise<number> =>
+  new Promise((resolve, reject) =>
+    AppleHealthKit.getStepCount(
+      getOptionsStepCount(date),
+      (err: Object, results: HealthValue) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(results.value);
+      }
+    )
+  );
+
 function getCalorieFromWalkDistance(walkDistance: number): number {
   // 10000보 == 300kcal로 계산
   const calorie: number = 0.03 * walkDistance;
@@ -70,8 +92,6 @@ export default function TabOneScreen({
   // state: walkDistance, walkCalorie
   useEffect(() => {
     let optionsStepCount = {
-      date: new Date(2022, 5, 18).toISOString(),
-      // endDate: new Date(2022, 6, 4).toISOString(),
       includeManuallyAdded: true,
     };
 
@@ -81,7 +101,6 @@ export default function TabOneScreen({
         if (err) {
           return;
         }
-        console.log(results);
         const stepCount = results.value;
         setWalkDistance(stepCount);
         setWalkCalorie(getCalorieFromWalkDistance(stepCount));

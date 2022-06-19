@@ -34,7 +34,16 @@ export class Calendar extends React.Component {
     nextCount: 0,
     calendarDay: null,
     fadeAni: null,
-    schedule: [],
+    schedule: [
+      {
+        date: 1,
+        list: [
+          {
+            weightChange: 0.1,
+          },
+        ],
+      },
+    ],
     curListLength: 0,
   };
 
@@ -235,8 +244,8 @@ export class Calendar extends React.Component {
                       >
                         {sub.day}
                       </Text>
-                      {this.state.schedule
-                        ? this.state.schedule.map((el, index) => {
+                      {this.props.schedule
+                        ? this.props.schedule.map((el, index) => {
                             return sub.day === el.date
                               ? el.list.map((elsub, index) => {
                                   const curListLength = el.list.length;
