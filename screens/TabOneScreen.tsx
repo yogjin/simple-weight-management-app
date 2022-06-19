@@ -143,9 +143,14 @@ export default function TabOneScreen({
   return (
     <View style={styles.container}>
       <View style={styles.walk}>
-        <Text style={styles.walkDistance}>
-          {walkDistance} 걸음, {walkCalorie}kcal 소모
-        </Text>
+        <View style={styles.walkTitleContainer}>
+          <Text style={[styles.title, styles.walkTitle]}>소모 칼로리</Text>
+        </View>
+        <View style={styles.walkDistanceContainer}>
+          <Text style={styles.walkDistance}>
+            {walkDistance} 걸음, {walkCalorie}kcal 소모
+          </Text>
+        </View>
       </View>
       <View
         style={styles.separator}
@@ -153,7 +158,7 @@ export default function TabOneScreen({
         darkColor="rgba(255,255,255,0.1)"
       />
       <View style={styles.calorie}>
-        <Text style={styles.calorieIntake}>섭취 칼로리</Text>
+        <Text style={[styles.title]}>섭취 칼로리</Text>
         <Text style={styles.calorieIntake}>{calorieIntake}kcal</Text>
         <View style={styles.calorieBtnContainer}>
           <View style={styles.caloriePlusBtnContainer}>
@@ -192,7 +197,9 @@ export default function TabOneScreen({
         darkColor="rgba(255,255,255,0.1)"
       />
       <View style={styles.weight}>
-        <Text style={styles.weightChangeText}>예상 체중변화</Text>
+        <Text style={[styles.title, styles.weightChangeText]}>
+          예상 체중변화
+        </Text>
         <View style={styles.weightChangeValueContainer}>
           {weightChange > 0 ? (
             <Text
@@ -224,11 +231,18 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  title: {
+    fontSize: 20,
+    fontWeight: '800',
+  },
   walk: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  walkTitleContainer: { flex: 1, marginTop: 10 },
+  walkTitle: {},
+  walkDistanceContainer: { flex: 4, justifyContent: 'center' },
   walkDistance: {
     fontSize: 20,
   },
@@ -258,7 +272,7 @@ const styles = StyleSheet.create({
   },
 
   weight: { flex: 1, alignItems: 'center' },
-  weightChangeText: { fontSize: 20 },
+  weightChangeText: {},
   weightChangeValueContainer: {
     flex: 1,
     justifyContent: 'center',
