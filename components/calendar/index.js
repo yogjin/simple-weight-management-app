@@ -5,8 +5,6 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-// import { use } from '../../context';
-
 import style from './style';
 
 import {
@@ -60,7 +58,6 @@ export class Calendar extends React.Component {
       fadeAni,
       schedule,
     });
-    // this.props.$data.setCurDate(this.props.$data.prop, curYear, curMonth);
   }
 
   getWeekDays(data, month) {
@@ -152,8 +149,6 @@ export class Calendar extends React.Component {
       curMonth: month,
       curYear: year,
     });
-
-    this.props.$data.setCurDate(this.props.$data.prop, year, month);
   }
 
   getPreMonth() {
@@ -169,8 +164,6 @@ export class Calendar extends React.Component {
       curMonth: month,
       curYear: year,
     });
-
-    this.props.$data.setCurDate(this.props.$data.prop, year, month);
   }
 
   render() {
@@ -297,4 +290,3 @@ export class Calendar extends React.Component {
     );
   }
 }
-// export default use(Calendar);
