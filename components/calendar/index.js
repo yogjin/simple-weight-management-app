@@ -179,10 +179,10 @@ export class Calendar extends React.Component {
     return (
       <GestureRecognizer
         style={[style.calendarView]}
-        onSwipeUp={(state) => {
+        onSwipeRight={(state) => {
           this.getNextMonth();
         }}
-        onSwipeDown={(state) => {
+        onSwipeLeft={(state) => {
           this.getPreMonth();
         }}
       >
