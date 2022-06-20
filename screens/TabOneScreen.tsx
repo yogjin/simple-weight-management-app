@@ -148,7 +148,7 @@ export default function TabOneScreen({
         </View>
         <View style={styles.walkDistanceContainer}>
           <Text style={styles.walkDistance}>
-            {walkDistance} 걸음, {walkCalorie}kcal 소모
+            {walkDistance} 걸음, {walkCalorie.toFixed(0)}kcal 소모
           </Text>
         </View>
       </View>
